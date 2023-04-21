@@ -1,0 +1,54 @@
+:root {
+  --color-background-1: hsl(0, 0%, 100%);
+  --color-primary-1: hsl(217, 28%, 15%);
+
+  --font-heading: "Raleway", sans-serif;
+  --font-body: "Open Sans", sans-serif;
+
+  --padding-sm: 2.5rem 2rem;
+  --padding-md: 3.5rem 3rem;
+  --padding-lg: 4.5rem 4rem;
+  --padding-footer: 15rem 4rem 1rem;
+  --padding-footer-tablet: 20rem 3rem 1rem;
+  --padding-footer-mobile: 25rem 3rem 1rem;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+  line-height: 1.7;
+  font-weight: 700;
+}
+
+h1 {
+  font-size: 1.7rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+}
+
+h3 {
+  font-size: 1.4rem;
+}
+
+p {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.7;
+  padding: 0.5rem 0;
+}

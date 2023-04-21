@@ -1,0 +1,11 @@
+.adminWrap {
+  min-height: 1500px;
+  background-color: #fff;
+  color: #000;
+}
+
+.adminWrap a {
+  color: var(--neutral-color-black);
+  font-family: var(--font-heading);
+  text-decoration: none;
+}
