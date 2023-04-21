@@ -1,31 +1,29 @@
-import './app.style.css';
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from 'react-router-dom';
+import "./app.style.css";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import Layout from './app.layout'
-import Admin from '../admin/admin'
-import Site from '../site/site'
+import Layout from "./app.layout";
+import Admin from "../admin/admin";
+import Site from "../site/site";
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
     element: <Layout />,
-    children: [{
-      path: 'admin',
-      element: <Admin />,
-    }, {
-      path: '/',
-      element: <Site />,
-    }],
-  },
-])
+    children: [
+      {
+        path: "admin",
+        element: <Admin />
+      },
+      {
+        path: "/",
+        element: <Site />
+      }
+    ]
+  }
+]);
 
 function App() {
-  return (<RouterProvider
-    router={router}
-  />)
+  return <RouterProvider router={router} />;
 }
 
-export default App
+export default App;

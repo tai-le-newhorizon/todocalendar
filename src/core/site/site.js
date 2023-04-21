@@ -1,19 +1,18 @@
-import Render from './site.render'
-import { useEffect } from 'react';
+import Render from "./site.render";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 function Site() {
   let navigate = useNavigate();
 
-  const vm = {}
+  const vm = {};
   vm.handleGoToAdminClick = () => {
-    navigate('/admin');
-  }
+    navigate("/admin");
+  };
 
-  useEffect(() => {
-  })
+  useEffect(() => {});
 
-  return Render.Homepage(vm)
+  return Render.Homepage(vm);
 }
 
 export default Site;
