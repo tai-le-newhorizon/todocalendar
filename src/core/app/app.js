@@ -2,8 +2,8 @@ import "./app.style.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import Layout from "./app.layout";
-import Admin from "../admin/admin";
 import Site from "../site/site";
+import AdminLayout from "../admin/admin.layout";
 
 const router = createBrowserRouter([
   {
@@ -12,7 +12,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "admin",
-        element: <Admin />
+        element: <AdminLayout />
       },
       {
         path: "/",

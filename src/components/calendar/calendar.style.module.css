@@ -1,0 +1,6 @@
+.calendar_wrap {
+  width: 80%;
+  margin: auto;
+  margin-top: var(--margin-sm);
+  margin-bottom: var(--margin-sm);
+}

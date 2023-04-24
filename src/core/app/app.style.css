@@ -5,6 +5,10 @@
   --font-heading: "Raleway", sans-serif;
   --font-body: "Open Sans", sans-serif;
 
+  --margin-sm: 2.5rem;
+  --margin-md: 3rem;
+  --margin-lg: 4.5rem;
+
   --padding-sm: 2.5rem 2rem;
   --padding-md: 3.5rem 3rem;
   --padding-lg: 4.5rem 4rem;
