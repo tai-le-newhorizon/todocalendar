@@ -1,0 +1,87 @@
+/* C U S T O M */
+.ec-day {
+	border: 1px solid rgb(233, 233, 231);
+}
+
+.ec-day {
+	border-style: none none none solid;
+}
+
+.ec-event {
+	background: none;
+	box-shadow: none;
+	padding-left: 6px;
+  margin-bottom: 4px;
+}
+
+.ec-event-body {
+	cursor: pointer;
+	background: white;
+	border-radius: 3px;
+	box-shadow: rgba(15, 15, 15, 0.1) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 2px 4px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	min-height: 30px;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+.task_title {
+	color: #37352f;
+}
+
+.ec-day.ec-today {
+	background-color: #FFF3E0;
+}
+
+.ec-today .ec-day-head {
+	color: red;
+}
+
+.ec-day-head {
+	font-size: 0.8rem;
+}
+
+.ec-header {
+	color: #aaa;
+	font-size: 0.8rem;
+}
+
+.ec-button {
+	font-size: 0.8rem;
+}
+
+.task_status {
+	background-color: #4CAF50;
+	display: inline-block;
+	font-size: 0.6rem;
+	padding: 0px 6px;
+	border-radius: 8px;
+	color: #fff;
+}
+
+.task_projects {
+	background-color: #03A9F4;
+	display: inline-block;
+	font-size: 0.6rem;
+	padding: 0px 6px;
+	border-radius: 8px;
+	color: #fff;
+}
+
+.task_tags {
+	background-color: #E8EAF6;
+	font-size: 0.6rem;
+	padding: 1px 6px;
+	border-radius: 8px;
+	color: #000;
+}
+
+.ec-button {
+  border-color: #e8eaf6;
+}
+
+.ec-button:not(:disabled):hover, .ec-button.ec-active {
+  background-color: #e8eaf6;
+  border-color: #e8eaf6;
+}

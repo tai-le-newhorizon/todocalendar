@@ -13,14 +13,10 @@ let indexedDB =
   baseName = "ztodo",
   storeName = "todolist01";
 
-function logerr(err) {
-  console.log(err);
-}
-
 function connectDB(f) {
   // Open (or create) the database
   let request = indexedDB.open(baseName, 1);
-  request.onerror = logerr;
+  request.onerror = zlog;
   request.onsuccess = function () {
     f(request.result);
   };
@@ -36,12 +32,12 @@ function connectDB(f) {
     if (!Db.objectStoreNames.contains(storeName)) {
       let store = Db.createObjectStore(storeName, {
         keyPath: "id",
-        autoIncrement: true
+        autoIncrement: true,
       });
       store.createIndex("start", "start");
       store.createIndex("tags", "extendedProps.tags", {
         unique: false,
-        multiEntry: true
+        multiEntry: true,
       });
     }
     connectDB(f);
@@ -54,7 +50,7 @@ function get(id, f) {
       .transaction([storeName], "readonly")
       .objectStore(storeName)
       .get(id);
-    transaction.onerror = logerr;
+    transaction.onerror = zlog;
     transaction.onsuccess = function () {
       f(transaction.result ? transaction.result : -1);
     };
@@ -110,54 +106,51 @@ function findAll(f, keyName, keyRange) {
 }
 
 function up(obj) {
-  //obj with id
-  del(obj.id, "up");
-  add(obj, "up");
+  let id = obj.id;
+  if (id) {
+    del(id);
+    add(obj);
+  }
 }
 
-function add(obj, info) {
-  info = typeof info !== "undefined" ? false : true;
-  connectDB(function (db) {
-    let transaction = db.transaction([storeName], "readwrite");
-    let objectStore = transaction.objectStore(storeName);
-    let objectStoreRequest = objectStore.add(obj);
-    objectStoreRequest.onerror = logerr;
-    objectStoreRequest.onsuccess = function () {
-      if (info) {
-        console.log("Rows has been added");
-      } else {
-        console.log("Rows has been updated");
-      }
-      console.info(objectStoreRequest.result);
+function add(obj, cb) {
+  connectDB((db) => {
+    let tx = db.transaction([storeName], "readwrite");
+    let store = tx.objectStore(storeName);
+    let request = store.add(obj);
+    request.onerror = zlog;
+    request.onsuccess = () => {
+      typeof cb == "function" && cb(request.result);
     };
   });
 }
 
-function del(id, info) {
-  info = typeof info !== "undefined" ? false : true;
-  connectDB(function (db) {
-    let transaction = db.transaction([storeName], "readwrite");
-    let objectStore = transaction.objectStore(storeName);
-    let objectStoreRequest = objectStore.delete(id);
-    objectStoreRequest.onerror = logerr;
-    objectStoreRequest.onsuccess = function () {
-      if (info) console.log("Rows has been deleted: ", id);
+function del(id, cb) {
+  connectDB((db) => {
+    let tx = db.transaction([storeName], "readwrite");
+    let store = tx.objectStore(storeName);
+    let request = store.delete(id);
+    request.onerror = zlog;
+    request.onsuccess = () => {
+      typeof cb == "function" && cb(request.result);
     };
   });
 }
 
 // Run data seed
-let dataSeed = window.dataSeed;
-for (let i = 0; i < dataSeed.length; i++) {
-  const ele = dataSeed[i];
-  add(ele);
-}
+// let dataSeed = window.dataSeed;
+// for (let i = 0; i < dataSeed.length; i++) {
+//   const ele = dataSeed[i];
+//   add(ele);
+// }
 
 // IDBKeyRange.bound(0, 10000)
 let exportObject = {
   findAll,
   get,
-  up
+  add,
+  up,
+  del,
 };
 
-export default exportObject
+export default exportObject;

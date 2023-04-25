@@ -4,3 +4,54 @@
   margin-top: var(--margin-sm);
   margin-bottom: var(--margin-sm);
 }
+
+.filters {
+  display: block;
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
+.filters span {
+  padding: 2px 5px;
+  background-color: #fafafa;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  min-width: 30px;
+  text-align: center;
+  background-color: #e8eaf6;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+
+.form {
+  width: 250px;
+  min-height: 100px;
+  padding: 20px;
+  margin-bottom: 20px;
+  border: solid 1px #e8eaf6;
+  border-radius: 5px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  text-align: center;
+}
+
+.form div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  gap: 10px;
+}
+
+.form div * {
+  width: 100%;
+}
+
+.form .form_btns {
+  margin-top: auto;
+  margin-bottom: 0px;
+  cursor: pointer;
+}
