@@ -135,13 +135,6 @@ function del(id, cb) {
   });
 }
 
-// Run data seed
-// let dataSeed = window.dataSeed;
-// for (let i = 0; i < dataSeed.length; i++) {
-//   const ele = dataSeed[i];
-//   add(ele);
-// }
-
 // IDBKeyRange.bound(0, 10000)
 let exportObject = {
   findAll,

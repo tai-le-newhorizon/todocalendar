@@ -56,3 +56,7 @@ p {
   line-height: 1.7;
   padding: 0.5rem 0;
 }
+
+select {
+  min-height: 23px;
+}

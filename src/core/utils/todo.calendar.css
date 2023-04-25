@@ -60,13 +60,18 @@
 	color: #fff;
 }
 
+.task_status.doing {
+  background-color: #2196F3;
+}
+
 .task_projects {
-	background-color: #03A9F4;
-	display: inline-block;
-	font-size: 0.6rem;
-	padding: 0px 6px;
-	border-radius: 8px;
-	color: #fff;
+  display: none !important;
+  background-color: #e1f5fe;
+  display: inline-block;
+  font-size: 0.6rem;
+  padding: 0px 6px;
+  border-radius: 8px;
+  color: #000000;
 }
 
 .task_tags {
