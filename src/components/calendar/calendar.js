@@ -4,13 +4,15 @@ import { useForm } from "react-hook-form";
 import todoModel from "./../../core/utils/todo.model.indexedDB";
 import S from "./calendar.style.module.css";
 
+const defaultTitle = ""
+
 let $ = window.$;
 function Calendar() {
   let vm = {
     domRef: R.createRef(),
     form: useForm({
       defaultValues: {
-        title: "...",
+        title: defaultTitle,
         tags: ["code", "c++", "dev"],
         projects: ["NTC", "NHZ"],
         extendedProps: {
@@ -40,8 +42,13 @@ function Calendar() {
           </select>
         </div>
         <div className={S.form_btns}>
-          <input type="submit" />
-          <button onClick={vm.handleDeleteClick}>delete</button>
+          <input className={S.btn_submit} type="submit" />
+          <div className={S.btn_cancel} onClick={vm.handleCancelClick}>
+            Cancel
+          </div>
+          <div className={S.btn_delete} onClick={vm.handleDeleteClick}>
+            Delete
+          </div>
         </div>
       </form>
       <div>
@@ -59,23 +66,24 @@ function Calendar() {
 }
 
 function initHandlers(vm) {
+  let updateEvent = (info) => {
+    let event = info.event;
+    event.id = parseInt(event.id);
+    todoModel.up(event);
+  };
+
   vm.useEffect = () => {
     vm.calendarEle = $(vm.domRef.current).TodoCalendar("init", {
-      eventChange: (info) => {
-        let event = info.event;
-        event.id = parseInt(event.id)
-        todoModel.up(event);
-      },
+      eventResize: updateEvent,
+      eventDrop: updateEvent,
       dateClick: (info) => {
-        console.log(info);
         let event = {
           start: info.dateStr,
           end: info.dateStr,
-          resourceId: 1,
-          title: "Todolist",
+          title: defaultTitle,
           allDay: true,
           extendedProps: {
-            status: "doing",
+            status: "todo",
             tags: ["dev", "code", "c++"],
             projects: ["nhz", "personal"],
           },
@@ -83,6 +91,12 @@ function initHandlers(vm) {
         todoModel.add(event, (eventId) => {
           event.id = eventId;
           vm.calendarEle.calendar.addEvent(event);
+
+          // Set form
+          vm.form.reset();
+          vm.form.setValue("title", event.title);
+          vm.form.setValue("extendedProps", event.extendedProps);
+          vm.form.setValue("eventRaw", event);
         });
       },
       eventClick: (info) => {
@@ -113,9 +127,11 @@ function initHandlers(vm) {
     let formEvent = vm.form.getValues();
     let curEvent = formEvent.eventRaw;
     vm.calendarEle.calendar.removeEventById(curEvent.id);
-    todoModel.del(parseInt(curEvent.id), (eventId) => {
-      console.log(eventId)
-    });
+    todoModel.del(parseInt(curEvent.id));
+  };
+
+  vm.handleCancelClick = () => {
+    vm.form.reset();
   };
 }
 

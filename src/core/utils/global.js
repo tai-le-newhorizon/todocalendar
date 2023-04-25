@@ -9,5 +9,5 @@ window.ztry = function (f, callback = () => {}) {
 };
 
 window.zlog = function (...args) {
-  // zlog(...args)
+  console.log(...args)
 }

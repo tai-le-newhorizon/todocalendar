@@ -6,10 +6,7 @@ let indexedDB =
     window.webkitIndexedDB ||
     window.msIndexedDB ||
     window.shimIndexedDB,
-  // IDBTransaction =
-  //   window.IDBTransaction ||
-  //   window.webkitIDBTransaction ||
-  //   window.msIDBTransaction,
+    // IDBTransaction = window.IDBTransaction || window.webkitIDBTransaction || window.msIDBTransaction,
   baseName = "ztodo",
   storeName = "todolist01";
 
@@ -22,9 +19,7 @@ function connectDB(f) {
   };
 
   request.onupgradeneeded = function (e) {
-    let Db = e.currentTarget.result; //let Db = e.target.result;
-
-    //uncomment if we want to start clean
+    let Db = e.currentTarget.result;
     if (Db.objectStoreNames.contains(storeName))
       Db.deleteObjectStore(storeName);
 
@@ -106,14 +101,15 @@ function findAll(f, keyName, keyRange) {
 }
 
 function up(obj) {
-  let id = obj.id;
-  if (id) {
-    del(id);
-    add(obj);
-  }
+  zlog('up: ', obj)
+  if (!obj.id) return
+  del(obj.id);
+  add(obj);
 }
 
 function add(obj, cb) {
+  zlog('add: ', obj)
+  if (!obj) return
   connectDB((db) => {
     let tx = db.transaction([storeName], "readwrite");
     let store = tx.objectStore(storeName);
@@ -126,6 +122,8 @@ function add(obj, cb) {
 }
 
 function del(id, cb) {
+  zlog('del: ', id)
+  if (!id) return
   connectDB((db) => {
     let tx = db.transaction([storeName], "readwrite");
     let store = tx.objectStore(storeName);

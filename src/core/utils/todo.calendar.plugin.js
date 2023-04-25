@@ -25,8 +25,6 @@ import todoModel from "./todo.model.indexedDB";
         nowIndicator: true,
         selectable: true,
         eventStartEditable: true,
-        eventResize: options.eventChange,
-        eventDrop: options.eventChange,
         eventContent: (info) => renderEventContent(info)
       },
       options
