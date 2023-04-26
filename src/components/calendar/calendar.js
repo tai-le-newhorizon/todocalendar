@@ -1,18 +1,15 @@
 import R from "react";
 import { useForm } from "react-hook-form";
 
-import todoModel from "./../../core/utils/todo.model.indexedDB";
 import S from "./calendar.style.module.css";
+import initHandlers from "./calendar.handlers";
 
-const defaultTitle = ""
-
-let $ = window.$;
 function Calendar() {
   let vm = {
     domRef: R.createRef(),
     form: useForm({
       defaultValues: {
-        title: defaultTitle,
+        title: "",
         tags: ["code", "c++", "dev"],
         projects: ["NTC", "NHZ"],
         extendedProps: {
@@ -63,76 +60,6 @@ function Calendar() {
       <div id="abc" ref={vm.domRef}></div>
     </div>
   );
-}
-
-function initHandlers(vm) {
-  let updateEvent = (info) => {
-    let event = info.event;
-    event.id = parseInt(event.id);
-    todoModel.up(event);
-  };
-
-  vm.useEffect = () => {
-    vm.calendarEle = $(vm.domRef.current).TodoCalendar("init", {
-      eventResize: updateEvent,
-      eventDrop: updateEvent,
-      dateClick: (info) => {
-        let event = {
-          start: info.dateStr,
-          end: info.dateStr,
-          title: defaultTitle,
-          allDay: true,
-          extendedProps: {
-            status: "todo",
-            tags: ["dev", "code", "c++"],
-            projects: ["nhz", "personal"],
-          },
-        };
-        todoModel.add(event, (eventId) => {
-          event.id = eventId;
-          vm.calendarEle.calendar.addEvent(event);
-
-          // Set form
-          vm.form.reset();
-          vm.form.setValue("title", event.title);
-          vm.form.setValue("extendedProps", event.extendedProps);
-          vm.form.setValue("eventRaw", event);
-        });
-      },
-      eventClick: (info) => {
-        let event = info.event;
-        vm.form.setValue("title", event.title);
-        vm.form.setValue("extendedProps", event.extendedProps);
-        vm.form.setValue("eventRaw", event);
-      },
-    });
-  };
-
-  vm.handleSubmit = (data) => {
-    let formEvent = vm.form.getValues();
-    let curEvent = formEvent.eventRaw;
-    curEvent.title = formEvent.title;
-    curEvent.extendedProps = formEvent.extendedProps;
-    vm.calendarEle.calendar.updateEvent(curEvent);
-    curEvent.id = parseInt(curEvent.id);
-    todoModel.up(curEvent);
-  };
-
-  vm.handleFilterClick = (tagName) => {
-    vm.calendarEle.filter("tags", tagName);
-    zlog(vm.calendarEle.calendar.getEvents());
-  };
-
-  vm.handleDeleteClick = () => {
-    let formEvent = vm.form.getValues();
-    let curEvent = formEvent.eventRaw;
-    vm.calendarEle.calendar.removeEventById(curEvent.id);
-    todoModel.del(parseInt(curEvent.id));
-  };
-
-  vm.handleCancelClick = () => {
-    vm.form.reset();
-  };
 }
 
 export default Calendar;

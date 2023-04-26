@@ -60,6 +60,10 @@
 	color: #fff;
 }
 
+.task_status.todo {
+  background-color: #607D8B;
+}
+
 .task_status.doing {
   background-color: #2196F3;
 }
