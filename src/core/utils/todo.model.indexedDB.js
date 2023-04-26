@@ -34,6 +34,10 @@ function connectDB(f) {
         unique: false,
         multiEntry: true,
       });
+      store.createIndex("status", "extendedProps.status", {
+        unique: false,
+        multiEntry: true,
+      });
     }
     connectDB(f);
   };

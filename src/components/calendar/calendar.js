@@ -60,12 +60,19 @@ function Calendar() {
       </div>}
       <div className={S.calendar_wrap}>
         <div>
-          <div>Filters</div>
+          <div className={S.filter_label}>Tags</div>
           <div className={S.filters}>
             <span onClick={() => vm.handleFilterClick()}>all</span>
-            <span onClick={() => vm.handleFilterClick("dev")}>dev</span>
-            <span onClick={() => vm.handleFilterClick("code")}>code</span>
-            <span onClick={() => vm.handleFilterClick("c++")}>c++</span>
+            <span onClick={() => vm.handleFilterClick("tags", "dev")}>dev</span>
+            <span onClick={() => vm.handleFilterClick("tags", "code")}>code</span>
+            <span onClick={() => vm.handleFilterClick("tags", "c++")}>c++</span>
+          </div>
+          <div className={S.filter_label}>Status</div>
+          <div className={S.filters}>
+            <span onClick={() => vm.handleFilterClick()}>all</span>
+            <span onClick={() => vm.handleFilterClick("status", "todo")}>todo</span>
+            <span onClick={() => vm.handleFilterClick("status", "doing")}>doing</span>
+            <span onClick={() => vm.handleFilterClick("status", "done")}>done</span>
           </div>
         </div>
         <div id="abc" ref={vm.domRef}></div>

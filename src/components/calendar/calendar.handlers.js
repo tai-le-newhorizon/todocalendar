@@ -74,8 +74,8 @@ function initHandlers(vm) {
     vm.form.reset();
   };
 
-  vm.handleFilterClick = (tagName) => {
-    vm.calendarEle.filter("tags", tagName);
+  vm.handleFilterClick = (indexName, tagName) => {
+    vm.calendarEle.filter(indexName, tagName);
     zlog(vm.calendarEle.calendar.getEvents());
   };
 
