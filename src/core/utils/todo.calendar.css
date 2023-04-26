@@ -69,7 +69,7 @@
 }
 
 .task_projects {
-  display: none !important;
+  /* display: none !important; */
   background-color: #e1f5fe;
   display: inline-block;
   font-size: 0.6rem;

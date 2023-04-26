@@ -8,24 +8,24 @@ import todoModel from "./todo.model.indexedDB";
       return;
     }
 
-    options.eventChange = options.eventChange || function() {}
+    options.eventChange = options.eventChange || function () {};
     let settings = $.extend(
       {
         view: "dayGridMonth",
         headerToolbar: {
           start: "prev,next today",
           center: "title",
-          end: "dayGridMonth,timeGridWeek,timeGridDay,listWeek"
+          end: "dayGridMonth,timeGridWeek,timeGridDay,listWeek",
         },
         views: {
           timeGridWeek: { pointer: true },
-          resourceTimeGridWeek: { pointer: true }
+          resourceTimeGridWeek: { pointer: true },
         },
         dayMaxEvents: false,
         nowIndicator: true,
         selectable: true,
         eventStartEditable: true,
-        eventContent: (info) => renderEventContent(info)
+        eventContent: (info) => renderEventContent(info),
       },
       options
     );
@@ -39,10 +39,16 @@ import todoModel from "./todo.model.indexedDB";
 
     ele.filter = function (index, value) {
       let searchValue = null;
-      ztry(() => { searchValue = IDBKeyRange.only(value) })
-      todoModel.findAll((events) => {
-        ele.calendar.setOption("events", events);
-      }, index, searchValue);
+      ztry(() => {
+        searchValue = IDBKeyRange.only(value);
+      });
+      todoModel.findAll(
+        (events) => {
+          ele.calendar.setOption("events", events);
+        },
+        index,
+        searchValue
+      );
     };
 
     switch (action) {
@@ -74,19 +80,24 @@ import todoModel from "./todo.model.indexedDB";
       return { html: info.event.titleHtml };
     }
 
+    let projects = info.event.extendedProps.projects;
+    let tags = info.event.extendedProps.tags;
+
     let htmlStatus = !!info.event.extendedProps.status
       ? `<span class="task_status ${info.event.extendedProps.status}">${info.event.extendedProps.status}</span>`
       : "";
-    let htmlProjects = !!info.event.extendedProps.projects
-      ? `<span class="task_projects ${
-          info.event.extendedProps.projects
-        }">${info.event.extendedProps.projects.join(" ")}</span>`
-      : "";
-    let htmlTags = !!info.event.extendedProps.tags
-      ? `<span class="task_tags ${
-          info.event.extendedProps.tags
-        }">${info.event.extendedProps.tags.join(" ")}</span>`
-      : "";
+    let htmlProjects =
+      projects && projects.length > 0
+        ? `<span class="task_projects ${projects}">
+            ${projects.join?.(" ")}
+          </span>`
+        : "";
+    let htmlTags =
+      tags && tags.length > 0
+        ? `<span class="task_tags ${tags}">
+            ${tags.join?.(" ")}
+          </span>`
+        : "";
     let html = `<div class="task">
       <div class="task_title">${info.event.title}</div>
       <div>${htmlStatus} ${htmlProjects} <div>${htmlTags}</div></div>

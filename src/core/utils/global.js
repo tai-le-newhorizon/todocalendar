@@ -11,3 +11,10 @@ window.ztry = function (f, callback = () => {}) {
 window.zlog = function (...args) {
   console.log(...args)
 }
+
+window.Z = {
+  preventDefault: function (e) {
+    e.preventDefault?.()
+    e.stopPropagation?.()
+  }
+}

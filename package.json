@@ -34,7 +34,8 @@
     ],
     "globals": {
       "ztry": true,
-      "zlog": true
+      "zlog": true,
+      "Z": true
     }
   },
   "browserslist": {
