@@ -100,7 +100,7 @@ import todoModel from "./todo.model.indexedDB";
         : "";
     let html = `<div class="task">
       <div class="task_title">${info.event.title}</div>
-      <div>${htmlStatus} ${htmlProjects} <div>${htmlTags}</div></div>
+      <div>${htmlStatus} ${htmlProjects} ${htmlTags}</div>
     </div>`;
     return { html };
   };

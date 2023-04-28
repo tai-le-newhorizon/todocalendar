@@ -7,11 +7,14 @@
 	border-style: none none none solid;
 }
 
+.ec-events {
+	margin-bottom: 5px;
+}
 .ec-event {
 	background: none;
 	box-shadow: none;
-	padding-left: 6px;
-  margin-bottom: 4px;
+	padding: 4px 2px;
+	padding-left: 7px;
 }
 
 .ec-event-body {
@@ -24,10 +27,20 @@
 	min-height: 30px;
 	padding-left: 5px;
 	padding-right: 5px;
+	box-sizing: border-box;
+}
+
+.task {
+	display: block;
+	width: 100%;
 }
 
 .task_title {
 	color: #37352f;
+	width: 100%;
+	position: relative;
+	display: block;
+	overflow-wrap: break-word;
 }
 
 .ec-day.ec-today {
