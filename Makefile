@@ -1,6 +1,6 @@
 server:
 	yarn build
-	pm2 delete todocalendar
+	pm2 delete todocalendar || true
 	pm2 serve ./build 3000 --name "todocalendar" --spa
 
 dev:
