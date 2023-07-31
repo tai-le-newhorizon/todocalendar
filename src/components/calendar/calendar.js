@@ -11,7 +11,7 @@ function Calendar() {
       defaultValues: {
         title: "Happystep",
         extendedProps: {
-          status: "todo",
+          status: "doing",
           tags: "code",
           projects: "personal",
         },

@@ -21,7 +21,7 @@ function initHandlers(vm) {
           end: info.dateStr,
           allDay: true,
           extendedProps: {
-            status: "todo",
+            status: "doing",
             tags: ["code"],
             projects: ["personal"],
           },
