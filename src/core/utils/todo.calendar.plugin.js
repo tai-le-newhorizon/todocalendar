@@ -21,6 +21,7 @@ import todoModel from "./todo.model.indexedDB";
           timeGridWeek: { pointer: true },
           resourceTimeGridWeek: { pointer: true },
         },
+        firstDay: 1,
         dayMaxEvents: false,
         nowIndicator: true,
         selectable: true,
